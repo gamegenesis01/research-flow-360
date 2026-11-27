@@ -1,7 +1,7 @@
 {
-  "date": "2026-11-26",
-  "session": "close",
-  "updated_at": "2026-11-26T19:50-05:00",
+  "date": "2026-11-27",
+  "session": "morning",
+  "updated_at": "2026-11-27T08:14-05:00",
   "items": [
     {
       "key": "spy",
@@ -67,10 +67,10 @@
       "key": "btc",
       "label": "Bitcoin",
       "kind": "usd0",
-      "price": 60689.37,
-      "change": 203.6,
-      "change_pct": 0.3366,
-      "as_of": "2026-11-26",
+      "price": 61522,
+      "change": 697.99,
+      "change_pct": 1.1476,
+      "as_of": "2026-11-27",
       "source": "Finnhub"
     },
     {
@@ -84,6 +84,15 @@
       "source": "Finnhub"
     }
   ],
-  "start": {},
+  "start": {
+    "spy": 716.7,
+    "qqq": 633.93,
+    "dia": 501.27,
+    "y10": 4.85,
+    "uso": 139.89,
+    "gld": 327.45,
+    "btc": 61522,
+    "uup": 29.6
+  },
   "sources": "Finnhub (funds and bitcoin); U.S. Treasury (10-year yield)"
 }
