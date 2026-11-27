@@ -1,7 +1,7 @@
 {
   "date": "2026-11-26",
   "session": "close",
-  "updated_at": "2026-11-26T19:46-05:00",
+  "updated_at": "2026-11-26T19:50-05:00",
   "items": [
     {
       "key": "spy",
@@ -11,8 +11,7 @@
       "change": -2.08,
       "change_pct": -0.2894,
       "as_of": "2026-11-25",
-      "source": "Finnhub",
-      "stale": true
+      "source": "Finnhub"
     },
     {
       "key": "qqq",
@@ -22,8 +21,7 @@
       "change": -4.17,
       "change_pct": -0.6535,
       "as_of": "2026-11-25",
-      "source": "Finnhub",
-      "stale": true
+      "source": "Finnhub"
     },
     {
       "key": "dia",
@@ -33,8 +31,7 @@
       "change": 1.53,
       "change_pct": 0.3062,
       "as_of": "2026-11-25",
-      "source": "Finnhub",
-      "stale": true
+      "source": "Finnhub"
     },
     {
       "key": "y10",
@@ -54,8 +51,7 @@
       "change": 4.46,
       "change_pct": 3.2932,
       "as_of": "2026-11-25",
-      "source": "Finnhub",
-      "stale": true
+      "source": "Finnhub"
     },
     {
       "key": "gld",
@@ -65,19 +61,17 @@
       "change": 2,
       "change_pct": 0.6145,
       "as_of": "2026-11-25",
-      "source": "Finnhub",
-      "stale": true
+      "source": "Finnhub"
     },
     {
       "key": "btc",
       "label": "Bitcoin",
       "kind": "usd0",
-      "price": 60744.01,
-      "change": 107.22,
-      "change_pct": 0.1768,
+      "price": 60689.37,
+      "change": 203.6,
+      "change_pct": 0.3366,
       "as_of": "2026-11-26",
-      "source": "Finnhub",
-      "stale": true
+      "source": "Finnhub"
     },
     {
       "key": "uup",
@@ -87,8 +81,7 @@
       "change": -0.03,
       "change_pct": -0.1012,
       "as_of": "2026-11-25",
-      "source": "Finnhub",
-      "stale": true
+      "source": "Finnhub"
     }
   ],
   "start": {},
