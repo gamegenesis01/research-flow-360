@@ -1,9 +1,9 @@
 name: Publish Research Flow 360
 
-# Publishes the site on every push to main, and refreshes the market snapshot
-# twice each weekday: about 8:05 am ET (starting position) and 4:20 pm ET (market close).
-# Each time appears twice in UTC so it lands right in both standard and daylight time;
-# scripts/snapshot.py skips the run that falls outside its window or was already done.
+# Rebuilds and publishes the site on every push to main (for example, when an issue is approved),
+# and refreshes the market snapshot twice each weekday: about 8:05 am ET (starting position)
+# and 4:20 pm ET (market close). Each time appears twice in UTC so it lands right in both
+# standard and daylight time; scripts/snapshot.py skips the run outside its window or already done.
 
 on:
   push:
@@ -47,16 +47,19 @@ jobs:
             python3 scripts/snapshot.py
           fi
 
-      - name: Save snapshot to the repository
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      - name: Build pages from issues and templates
+        run: python3 scripts/build_site.py
+
+      - name: Save updates to the repository
         run: |
-          if git diff --quiet -- data/snapshot.json; then
-            echo "Snapshot unchanged."
+          git add -A data briefs ./*.html
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
-            git add data/snapshot.json
-            git commit -m "Update market snapshot"
+            git commit -m "Update site and market snapshot"
+            git pull --rebase origin main
             git push
           fi
 

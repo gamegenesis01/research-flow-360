@@ -1,0 +1,21 @@
+name: Check issue
+
+# Runs on every proposed change (pull request). If an issue file is missing something or is
+# badly formatted, this check fails and explains why, so it can be fixed before approval.
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate issue files
+        run: python3 scripts/build_site.py --check
+      - name: Build the site to be sure it renders
+        run: python3 scripts/build_site.py

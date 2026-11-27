@@ -833,6 +833,9 @@ input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius
 .snapshot small { font-family: var(--f-mono); font-size: .72rem; color: var(--ink-3); }
 .snapshot small:empty { display: none; }
 
+.plain-list { display: grid; gap: 6px; padding-left: 20px; list-style: disc; }
+.plain-list li { max-width: 40em; }
+
 /* Archive */
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
 .arch { display: grid; }
