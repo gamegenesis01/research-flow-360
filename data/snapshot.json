@@ -1,7 +1,7 @@
 {
   "date": "2026-11-26",
   "session": "close",
-  "updated_at": "2026-11-26T19:45-05:00",
+  "updated_at": "2026-11-26T19:46-05:00",
   "items": [
     {
       "key": "spy",
@@ -11,7 +11,8 @@
       "change": -2.08,
       "change_pct": -0.2894,
       "as_of": "2026-11-25",
-      "source": "Finnhub"
+      "source": "Finnhub",
+      "stale": true
     },
     {
       "key": "qqq",
@@ -21,7 +22,8 @@
       "change": -4.17,
       "change_pct": -0.6535,
       "as_of": "2026-11-25",
-      "source": "Finnhub"
+      "source": "Finnhub",
+      "stale": true
     },
     {
       "key": "dia",
@@ -31,12 +33,18 @@
       "change": 1.53,
       "change_pct": 0.3062,
       "as_of": "2026-11-25",
-      "source": "Finnhub"
+      "source": "Finnhub",
+      "stale": true
     },
     {
       "key": "y10",
       "label": "10-yr yield",
-      "kind": "yield"
+      "kind": "yield",
+      "price": 4.85,
+      "change": -0.06,
+      "change_pct": null,
+      "as_of": "2026-11-25",
+      "source": "U.S. Treasury"
     },
     {
       "key": "uso",
@@ -46,7 +54,8 @@
       "change": 4.46,
       "change_pct": 3.2932,
       "as_of": "2026-11-25",
-      "source": "Finnhub"
+      "source": "Finnhub",
+      "stale": true
     },
     {
       "key": "gld",
@@ -56,7 +65,8 @@
       "change": 2,
       "change_pct": 0.6145,
       "as_of": "2026-11-25",
-      "source": "Finnhub"
+      "source": "Finnhub",
+      "stale": true
     },
     {
       "key": "btc",
@@ -66,7 +76,8 @@
       "change": 107.22,
       "change_pct": 0.1768,
       "as_of": "2026-11-26",
-      "source": "Finnhub"
+      "source": "Finnhub",
+      "stale": true
     },
     {
       "key": "uup",
@@ -76,7 +87,8 @@
       "change": -0.03,
       "change_pct": -0.1012,
       "as_of": "2026-11-25",
-      "source": "Finnhub"
+      "source": "Finnhub",
+      "stale": true
     }
   ],
   "start": {},
