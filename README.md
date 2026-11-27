@@ -1,7 +1,7 @@
 # Research Flow 360
 
 The website for **Research Flow 360**, a free weekday market news brief by **Accel Financial Solutions**,
-part of Accel Global Holdings. Editor: Shithin Abraham.
+part of Accel Global Holdings.
 
 Plain HTML, CSS and JavaScript. No build step needed to host it.
 
