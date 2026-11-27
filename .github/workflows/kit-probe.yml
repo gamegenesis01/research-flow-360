@@ -1,0 +1,24 @@
+name: Kit sign-up probe (temporary)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kit hosted form page
+        run: |
+          curl -sL https://accel-3.kit.com/2774e9addb | grep -oiE '<form[^>]*>|<input[^>]*>|<script[^>]*src="[^"]*"' | head -40 || true
+      - name: Post to sign-up endpoints
+        run: |
+          for host in app.kit.com app.convertkit.com; do
+            echo "=== $host"
+            curl -s -i -X POST "https://$host/forms/10250021/subscriptions" \
+              -H "Origin: https://gamegenesis01.github.io" -H "Accept: application/json" \
+              --form-string "email_address=rf360-probe@example.com" | head -40
+            echo
+          done
