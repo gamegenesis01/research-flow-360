@@ -17,6 +17,23 @@ Plain HTML, CSS and JavaScript. No build step needed to host it.
 `assets/styles.css` holds every style (light and dark themes); `assets/app.js` holds the menu, archive
 filters and sign-up form behaviour. `src/rf/` keeps the page bodies the pages were generated from.
 
+## Live market snapshot
+
+The snapshot on `brief.html` reads `data/snapshot.json`, which `scripts/snapshot.py` refreshes every
+weekday at about **8:05 am ET** (the starting position) and **4:20 pm ET** (market close, with each
+item's 8 am value shown underneath).
+
+| Box | Source |
+| --- | --- |
+| S&P 500, Nasdaq 100, Dow | Finnhub: the SPY, QQQ and DIA funds that track them |
+| Oil, gold, U.S. dollar | Finnhub: the USO, GLD and UUP funds |
+| Bitcoin | Finnhub (BINANCE:BTCUSDT) |
+| 10-year yield | U.S. Treasury daily yield curve (public data) |
+
+Setup: add your Finnhub key as a repository secret named **`FINNHUB_API_KEY`**
+(Settings → Secrets and variables → Actions). To refresh now: Actions → Publish Research Flow 360 →
+Run workflow. Check that your Finnhub plan allows showing its data on a public website.
+
 ## Publishing
 
 Every push to `main` publishes the site with GitHub Pages (`.github/workflows/pages.yml`).

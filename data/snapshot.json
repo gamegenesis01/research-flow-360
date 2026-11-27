@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-26",
+  "session": "close",
+  "updated_at": "2026-11-26T19:45-05:00",
+  "items": [
+    {
+      "key": "spy",
+      "label": "S&P 500 (SPY)",
+      "kind": "usd",
+      "price": 716.7,
+      "change": -2.08,
+      "change_pct": -0.2894,
+      "as_of": "2026-11-25",
+      "source": "Finnhub"
+    },
+    {
+      "key": "qqq",
+      "label": "Nasdaq 100 (QQQ)",
+      "kind": "usd",
+      "price": 633.93,
+      "change": -4.17,
+      "change_pct": -0.6535,
+      "as_of": "2026-11-25",
+      "source": "Finnhub"
+    },
+    {
+      "key": "dia",
+      "label": "Dow (DIA)",
+      "kind": "usd",
+      "price": 501.27,
+      "change": 1.53,
+      "change_pct": 0.3062,
+      "as_of": "2026-11-25",
+      "source": "Finnhub"
+    },
+    {
+      "key": "y10",
+      "label": "10-yr yield",
+      "kind": "yield"
+    },
+    {
+      "key": "uso",
+      "label": "Oil (USO)",
+      "kind": "usd",
+      "price": 139.89,
+      "change": 4.46,
+      "change_pct": 3.2932,
+      "as_of": "2026-11-25",
+      "source": "Finnhub"
+    },
+    {
+      "key": "gld",
+      "label": "Gold (GLD)",
+      "kind": "usd",
+      "price": 327.45,
+      "change": 2,
+      "change_pct": 0.6145,
+      "as_of": "2026-11-25",
+      "source": "Finnhub"
+    },
+    {
+      "key": "btc",
+      "label": "Bitcoin",
+      "kind": "usd0",
+      "price": 60744.01,
+      "change": 107.22,
+      "change_pct": 0.1768,
+      "as_of": "2026-11-26",
+      "source": "Finnhub"
+    },
+    {
+      "key": "uup",
+      "label": "U.S. dollar (UUP)",
+      "kind": "usd",
+      "price": 29.6,
+      "change": -0.03,
+      "change_pct": -0.1012,
+      "as_of": "2026-11-25",
+      "source": "Finnhub"
+    }
+  ],
+  "start": {},
+  "sources": "Finnhub (funds and bitcoin); U.S. Treasury (10-year yield)"
+}

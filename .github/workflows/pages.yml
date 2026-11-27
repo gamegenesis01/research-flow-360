@@ -1,18 +1,31 @@
 name: Publish Research Flow 360
 
+# Publishes the site on every push to main, and refreshes the market snapshot
+# twice each weekday: about 8:05 am ET (starting position) and 4:20 pm ET (market close).
+# Each time appears twice in UTC so it lands right in both standard and daylight time;
+# scripts/snapshot.py skips the run that falls outside its window or was already done.
+
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "5 12,13 * * 1-5"
+    - cron: "20 20,21 * * 1-5"
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Refresh the market snapshot now, even outside the update windows"
+        type: boolean
+        default: true
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -22,6 +35,31 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Refresh market snapshot
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.force }}" = "true" ]; then
+            python3 scripts/snapshot.py --force
+          else
+            python3 scripts/snapshot.py
+          fi
+
+      - name: Save snapshot to the repository
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: |
+          if git diff --quiet -- data/snapshot.json; then
+            echo "Snapshot unchanged."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+            git add data/snapshot.json
+            git commit -m "Update market snapshot"
+            git push
+          fi
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
