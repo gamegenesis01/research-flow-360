@@ -152,22 +152,51 @@
   }
 
   /* Email capture (static site: validates and confirms locally) */
-  var form = $("#ctaForm");
-  if (form) {
+
+  /* Newsletter sign-ups go to the Kit list (form "Newsletter site").
+     Kit stores the email and sends the confirmation email. */
+  var KIT_FORM_URL = "https://app.kit.com/forms/10250021/subscriptions";
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  var kitSubscribe = function (email) {
+    var data = function () { var fd = new FormData(); fd.append("email_address", email); return fd; };
+    return fetch(KIT_FORM_URL, { method: "POST", body: data(), headers: { Accept: "application/json" } })
+      .then(function (r) {
+        return r.json().then(function (j) {
+          if (j && j.status && j.status !== "success") throw new Error("rejected");
+          return true;
+        }, function () { if (!r.ok) throw new Error("rejected"); return true; });
+      }, function () {
+        /* Browser blocked reading the reply: send it as a plain form post instead. */
+        return fetch(KIT_FORM_URL, { method: "POST", body: data(), mode: "no-cors" }).then(function () { return true; });
+      });
+  };
+  var handleSignup = function (form, input, msg, okClass, badText) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var input = $("#email");
-      var msg = $("#ctaMsg");
       var val = input.value.trim();
-      var ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val);
-      msg.className = "cta__msg " + (ok ? "is-ok" : "is-err");
-      var okText = form.getAttribute("data-ok") || "You\u2019re on the list: {email}.";
-      msg.textContent = ok
-        ? okText.replace("{email}", val)
-        : "Enter an email like name@example.com to continue.";
-      if (ok) input.value = "";
+      var setMsg = function (ok, text) {
+        if (okClass) msg.className = okClass + " " + (ok ? "is-ok" : "is-err");
+        msg.textContent = text;
+      };
+      if (!EMAIL_RE.test(val)) { setMsg(false, badText); return; }
+      if (form.getAttribute("data-list") === "none") {
+        setMsg(true, (form.getAttribute("data-ok") || "Thanks: {email}.").replace("{email}", val));
+        input.value = ""; return;
+      }
+      var btn = form.querySelector("button");
+      if (btn) btn.disabled = true;
+      setMsg(true, "Signing you up\u2026");
+      kitSubscribe(val).then(function () {
+        setMsg(true, (form.getAttribute("data-ok") || "Almost done: check {email} for a confirmation link.").replace("{email}", val));
+        input.value = "";
+      }, function () {
+        setMsg(false, "That didn\u2019t go through. Please try again in a moment.");
+      }).then(function () { if (btn) btn.disabled = false; });
     });
-  }
+  };
+  var form = $("#ctaForm");
+  if (form) handleSignup(form, $("#email"), $("#ctaMsg"), "cta__msg",
+    "Enter an email like name@example.com to continue.");
 
   /* Live market snapshot: reads data/snapshot.json (updated twice each weekday) */
   var snap = $("[data-snapshot]");
@@ -227,13 +256,8 @@
 
   /* Extra sign-up forms (sidebar and others) */
   $$("form[data-signup]").forEach(function (f) {
-    f.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var input = f.querySelector("input[type=email]"), msg = f.querySelector("[role=status]");
-      var val = input.value.trim(), ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val);
-      msg.textContent = ok ? (f.getAttribute("data-ok") || "Thanks: {email}.").replace("{email}", val) : "Enter an email like name@example.com.";
-      if (ok) input.value = "";
-    });
+    handleSignup(f, f.querySelector("input[type=email]"), f.querySelector("[role=status]"), null,
+      "Enter an email like name@example.com.");
   });
 
   /* Footer year */

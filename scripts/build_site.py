@@ -582,7 +582,7 @@ def issue_body(issue: Issue, *, with_snapshot: bool, up: str) -> str:
     <div class="side-card side-card--pine">
       <h3>Get this in your inbox</h3>
       <p>Free, every weekday before 7:00 am ET.</p>
-      <form class="side-form" data-signup data-ok="You're in, {{email}}. Check your inbox to confirm." novalidate>
+      <form class="side-form" data-signup data-ok="Almost done, {{email}}: check your inbox and click the confirm link." novalidate>
         <label for="side-email" class="sr-only">Email</label>
         <input id="side-email" type="email" placeholder="you@email.com" autocomplete="email" required>
         <button class="btn btn--signal btn--block" type="submit">Subscribe free</button>
@@ -645,7 +645,7 @@ def archive_body(issues: list[Issue]) -> str:
         <h2 class="display display--cta">Never miss <em>an issue.</em></h2>
         <p>Research Flow 360, free, every weekday before 7:00 am ET.</p>
       </div>
-      <form class="cta__form" id="ctaForm" data-ok="You're in, {{email}}. Check your inbox to confirm, and your first Daily Brief arrives the next weekday morning." novalidate>
+      <form class="cta__form" id="ctaForm" data-ok="Almost done, {{email}}: check your inbox and click the confirm link. Your first Daily Brief arrives the next weekday morning." novalidate>
         <label for="email" class="sr-only">Email</label>
         <input id="email" name="email" type="email" placeholder="you@email.com" autocomplete="email" required>
         <button class="btn btn--signal" type="submit">Subscribe free</button>

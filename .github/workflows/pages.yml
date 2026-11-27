@@ -50,9 +50,17 @@ jobs:
       - name: Build pages from issues and templates
         run: python3 scripts/build_site.py
 
+      - name: Create the email in Kit for a newly approved issue
+        if: github.event_name == 'push'
+        env:
+          KIT_API_KEY: ${{ secrets.KIT_API_KEY }}
+          KIT_SEND_MODE: ${{ vars.KIT_SEND_MODE || 'draft' }}
+        run: python3 scripts/send_email.py
+
       - name: Save updates to the repository
         run: |
           git add -A data briefs ./*.html
+          git reset -q email-preview.html 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Nothing changed."
           else
