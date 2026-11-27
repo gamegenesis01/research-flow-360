@@ -162,6 +162,8 @@
     return fetch(KIT_FORM_URL, { method: "POST", body: data(), headers: { Accept: "application/json" } })
       .then(function (r) {
         return r.json().then(function (j) {
+          /* Kit's bot check: the reader confirms they're human on Kit's page, then the sign-up completes. */
+          if (j && j.status === "quarantined" && j.url) return { check: j.url };
           if (j && j.status && j.status !== "success") throw new Error("rejected");
           return true;
         }, function () { if (!r.ok) throw new Error("rejected"); return true; });
@@ -186,7 +188,22 @@
       var btn = form.querySelector("button");
       if (btn) btn.disabled = true;
       setMsg(true, "Signing you up\u2026");
-      kitSubscribe(val).then(function () {
+      kitSubscribe(val).then(function (res) {
+        if (res && res.check) {
+          var win = window.open(res.check, "_blank");
+          if (win) { try { win.opener = null; } catch (e2) {} }
+          msg.textContent = "";
+          if (okClass) msg.className = okClass + " is-ok";
+          msg.appendChild(document.createTextNode("One quick step: confirm you’re human on the page that opened, then check your inbox. "));
+          if (!win) {
+            var a = document.createElement("a");
+            a.href = res.check; a.target = "_blank"; a.rel = "noopener";
+            a.textContent = "Open the check →";
+            msg.appendChild(a);
+          }
+          input.value = "";
+          return;
+        }
         setMsg(true, (form.getAttribute("data-ok") || "Almost done: check {email} for a confirmation link.").replace("{email}", val));
         input.value = "";
       }, function () {
